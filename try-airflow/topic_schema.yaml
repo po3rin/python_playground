@@ -1,0 +1,82 @@
+- column: event_timestamp
+  description: Pub/Sub event timestamp
+  mode: REQUIRED
+  type: TIMESTAMP
+- column: payload
+  description: Pub/Sub message payload
+  mode: NULLABLE
+  type: STRUCT
+  subcolumns:
+    - column: sales_number
+      description: 売上番号
+      mode: NULLABLE
+      type: INT64
+    - column: sales_datetime
+      description: 売上日時
+      mode: NULLABLE
+      type: STRING
+    - column: sales_category
+      description: 売上区分
+      mode: NULLABLE
+      type: STRING
+    - column: department_code
+      description: 部門コード
+      mode: NULLABLE
+      type: INT64
+    - column: store_code
+      description: 店舗コード
+      mode: NULLABLE
+      type: INT64
+    - column: customer_code
+      description: 顧客コード
+      mode: NULLABLE
+      type: INT64
+    - column: employee_code
+      description: 社員コード
+      mode: NULLABLE
+      type: INT64
+    - column: detail
+      description: 売上明細
+      mode: NULLABLE
+      type: STRUCT
+      subcolumns:
+        - column: sales_row_number
+          description: 売上行番号
+          mode: NULLABLE
+          type: INT64
+        - column: item_code
+          description: 商品コード
+          mode: NULLABLE
+          type: INT64
+        - column: item_name
+          description: 商品名
+          mode: NULLABLE
+          type: STRING
+        - column: sale_unit_price
+          description: 販売単価
+          mode: NULLABLE
+          type: INT64
+        - column: sales_quantity
+          description: 売上数量
+          mode: NULLABLE
+          type: INT64
+        - column: discount_price
+          description: 値引額
+          mode: NULLABLE
+          type: INT64
+        - column: consumption_tax_rate
+          description: 消費税率
+          mode: NULLABLE
+          type: INT64
+        - column: consumption_tax_price
+          description: 消費税額
+          mode: NULLABLE
+          type: INT64
+        - column: sales_price
+          description: 売上額
+          mode: NULLABLE
+          type: INT64
+        - column: remarks
+          description: 備考
+          mode: NULLABLE
+          type: STRING
