@@ -14,3 +14,8 @@ print(type(a))
 
 g = a.decode('utf-8')
 print(g)
+
+z = r'\xe7\xb2\xbe\xe7\xa5\x9e\xe7\x9a\x8'
+b = literal_eval(f"b'{z}'")
+v = b.decode('sjis')
+print(v)
