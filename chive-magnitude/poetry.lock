@@ -1,0 +1,17 @@
+[[package]]
+category = "main"
+description = "A fast, efficient universal vector embedding utility package."
+name = "pymagnitude"
+optional = false
+python-versions = "*"
+version = "0.1.143"
+
+[metadata]
+content-hash = "ad51d8b77940a3626797df17b27dd4557128cff936bb6348740c74697a1d9f40"
+lock-version = "1.0"
+python-versions = "^3.9"
+
+[metadata.files]
+pymagnitude = [
+    {file = "pymagnitude-0.1.143.tar.gz", hash = "sha256:c97f552ea28d733aeac7058821ae876fe6b2f42392786bc4dd231ef73b3c8fe2"},
+]
