@@ -6,7 +6,7 @@ tokenizer = BertJapaneseTokenizer.from_pretrained(
     'cl-tohoku/bert-base-japanese-whole-word-masking')
 
 # Tokenize input
-text = '膝が痛い。'
+text = 'テレビでサッカーの試合を見る。'
 tokenized_text = tokenizer.tokenize(text)
 print(tokenized_text)
 # ['テレビ', 'で', 'サッカー', 'の', '試合', 'を', '見る', '。']
@@ -33,7 +33,7 @@ model.eval()
 # Predict
 with torch.no_grad():
     outputs = model(tokens_tensor)
-    predictions = outputs[0][0, masked_index].topk(5)  # 予測結果の上位5件を抽出
+    predictions = outputs[0][0, masked_index].topk(10)  # 予測結果の上位5件を抽出
 
 # Show results
 for i, index_t in enumerate(predictions.indices):
