@@ -6,7 +6,7 @@ tokenizer = BertJapaneseTokenizer.from_pretrained(
     'cl-tohoku/bert-base-japanese-whole-word-masking')
 
 # Tokenize input
-text = '膝がとても痛いので会社を休みます。'
+text = '胸が痛い'
 tokenized_text = tokenizer.tokenize(text)
 print(tokenized_text)
 # ['テレビ', 'で', 'サッカー', 'の', '試合', 'を', '見る', '。']
@@ -14,7 +14,7 @@ print(tokenized_text)
 # Mask a token that we will try to predict back with `BertForMaskedLM`
 # masked_index = 0
 # tokenized_text[masked_index] = '[CLS]'
-masked_index = 6
+masked_index = 1
 tokenized_text[masked_index] = '[MASK]'
 # masked_index = 12
 # tokenized_text[masked_index] = '[SEP]'
