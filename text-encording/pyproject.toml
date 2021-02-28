@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "text-encording"
+version = "0.1.0"
+description = ""
+authors = ["po3rin"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+sklearn = "^0.0"
+gensim = "^3.8.3"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
