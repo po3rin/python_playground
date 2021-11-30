@@ -3,15 +3,6 @@ import numpy as np
 from random import randint
 from scipy import stats 
 
-click_control = [randint(0,20) for i in range(10000)]
-view_control = [randint(1,60) for i in range(10000)]
-
-click_treatment = [randint(0,21) for i in range(10000)]
-view_treatment = [randint(1,60) for i in range(10000)]
-
-control = pd.DataFrame({'click':click_control,'view':view_control})
-treatment = pd.DataFrame({'click':click_treatment,'view':view_treatment})
-
 def var_ratio(x,y):
     mean_x = np.mean(x)
     mean_y = np.mean(y)
@@ -40,9 +31,24 @@ def ttest(mean_control,mean_treatment,var_control,var_treatment):
              'p-value':p_val}
     return pd.DataFrame(result,index=[0])
 
-var_control = var_ratio(control['click'],control['view'])
-var_treatment = var_ratio(treatment['click'],treatment['view'])
-mean_control = control['click'].sum()/control['view'].sum()
-mean_treatment = treatment['click'].sum()/treatment['view'].sum()
+def main():
+    click_control = [randint(0,20) for i in range(10000)]
+    view_control = [randint(1,60) for i in range(10000)]
 
-ttest(mean_control,mean_treatment,var_control,var_treatment)
+    click_treatment = [randint(0,21) for i in range(10000)]
+    view_treatment = [randint(1,60) for i in range(10000)]
+
+    control = pd.DataFrame({'click':click_control,'view':view_control})
+    treatment = pd.DataFrame({'click':click_treatment,'view':view_treatment})
+
+    var_control = var_ratio(control['click'],control['view'])
+    var_treatment = var_ratio(treatment['click'],treatment['view'])
+
+    mean_control = control['click'].sum()/control['view'].sum()
+    mean_treatment = treatment['click'].sum()/treatment['view'].sum()
+
+    result = ttest(mean_control,mean_treatment,var_control,var_treatment)
+    print(result)
+
+if __name__ == '__main__':
+    main()
