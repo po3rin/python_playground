@@ -1,53 +1,63 @@
+import math
+from random import randint
+
 import pandas as pd
 import numpy as np
-from random import randint
 from scipy import stats 
 
-def var_ratio(x,y):
+
+def variance(x,y):
     mean_x = np.mean(x)
     mean_y = np.mean(y)
-    var_x = np.var(x,ddof=1)
-    var_y = np.var(y,ddof=1)
-    cov_xy = np.cov(x,y,ddof=1)[0][1]
-    result = (var_x/mean_x**2 + var_y/mean_y**2 - 2*cov_xy/(mean_x*mean_y))*(mean_x*mean_x)/(mean_y*mean_y*len(x))
-    return result
-    
-def ttest(mean_control,mean_treatment,var_control,var_treatment):
-    diff = mean_treatment - mean_control
-    var = var_control+var_treatment
-    stde = 1.96*np.sqrt(var)
-    lower = diff - stde 
-    upper = diff + stde
-    z = diff/np.sqrt(var)
-    p_val = stats.norm.sf(abs(z))*2
+    var_x = np.var(x, ddof=1)
+    var_y = np.var(y, ddof=1)
 
-    result = {'mean_control':mean_control,
-             'mean_experiment':mean_treatment,
-             'var_control':var_control,
-             'var_experiment':var_treatment,
-             'difference':diff,
-             'lower_bound':lower,
-             'upper_bound':upper,
-             'p-value':p_val}
-    return pd.DataFrame(result,index=[0])
+    # メトリクスの平均の分散は標本分散をnで割ったものに等しい
+    return (var_x/mean_y**2 + var_y*mean_x**2/mean_y**3) / len(x)
+
+
+
+def t_test(control, treatment):
+    # 平均
+    ctr_mean_control = control['ctr'].sum() / len(control)
+    ctr_mean_treatment = treatment['ctr'].sum() / len(treatment)
+
+    # 分散
+    ctr_variance_control = variance(control['clicks'], control['views'])
+    ctr_variance_treatment = variance(treatment['clicks'], treatment['views'])
+
+    percent_change = ctr_mean_treatment - ctr_mean_control
+
+    var = ctr_variance_control + ctr_variance_treatment
+    z = percent_change / np.sqrt(var)
+    p = stats.norm.sf(abs(z)) * 2
+
+    result = {
+        'ctr_mean_control': ctr_mean_control,
+        'ctr_mean_treatment': ctr_mean_treatment,
+        'percent_change': percent_change,
+        'p-value': p
+    }
+    return pd.DataFrame(result, index=[0])
+
 
 def main():
-    click_control = [randint(0,20) for i in range(10000)]
-    view_control = [randint(1,60) for i in range(10000)]
+    # control ctr data
+    view_control = [math.floor(x) for x in np.random.normal(100, 10, 10000)]
+    click_control = [math.floor(views * np.random.normal(0.3, 0.1)) for views in view_control]
+    control = pd.DataFrame({'clicks': click_control, 'views': view_control})
+    control['ctr'] = control['clicks']/control['views']
 
-    click_treatment = [randint(0,21) for i in range(10000)]
-    view_treatment = [randint(1,60) for i in range(10000)]
+    # treatment ctr data
+    view_treatment = [math.floor(x) for x in np.random.normal(100, 10, 10000)]
+    click_treatment = [math.floor(views * np.random.normal(0.31, 0.1)) for views in view_control]
+    treatment = pd.DataFrame({'clicks': click_treatment, 'views': view_treatment})
+    treatment['ctr'] = treatment['clicks'] / treatment['views']
 
-    control = pd.DataFrame({'click':click_control,'view':view_control})
-    treatment = pd.DataFrame({'click':click_treatment,'view':view_treatment})
+    print(control)
+    print(treatment)
 
-    var_control = var_ratio(control['click'],control['view'])
-    var_treatment = var_ratio(treatment['click'],treatment['view'])
-
-    mean_control = control['click'].sum()/control['view'].sum()
-    mean_treatment = treatment['click'].sum()/treatment['view'].sum()
-
-    result = ttest(mean_control,mean_treatment,var_control,var_treatment)
+    result = t_test(control, treatment)
     print(result)
 
 if __name__ == '__main__':
