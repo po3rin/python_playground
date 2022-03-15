@@ -20,6 +20,8 @@ wheel = "^0.37.1"
 lightgbm = "^3.3.2"
 luigi = "^3.0.3"
 gokart = "^1.0.7"
+ginza = "^5.1.1"
+ja-ginza = "^5.1.0"
 
 [tool.poetry.dev-dependencies]
 
