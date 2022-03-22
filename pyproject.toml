@@ -22,6 +22,8 @@ luigi = "^3.0.3"
 gokart = "^1.0.7"
 ginza = "^5.1.1"
 ja-ginza = "^5.1.0"
+python-terrier = "^0.8.0"
+fastrank = "^0.7.0"
 
 [tool.poetry.dev-dependencies]
 
