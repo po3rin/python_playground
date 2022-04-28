@@ -1,0 +1,3 @@
+index:
+  - name: tmdb
+    mapping: eskeeper/tmdb.json
