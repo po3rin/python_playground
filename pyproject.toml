@@ -29,6 +29,9 @@ elasticsearch = "^7.16.2"
 tqdm = "^4.64.0"
 xgboost = "^1.6.0"
 graphviz = "^0.20"
+tensorflow-recommenders = "^0.6.0"
+tensorflow-datasets = "^4.5.2"
+recsys-slates-dataset = "^1.0.1"
 
 [tool.poetry.dev-dependencies]
 
