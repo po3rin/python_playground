@@ -32,6 +32,10 @@ graphviz = "^0.20"
 tensorflow-recommenders = "^0.6.0"
 tensorflow-datasets = "^4.5.2"
 recsys-slates-dataset = "^1.0.1"
+mlxtend = "^0.19.0"
+surprise = "^0.1"
+implicit = "^0.4.4"
+xlearn = "^0.40a1"
 
 [tool.poetry.dev-dependencies]
 
