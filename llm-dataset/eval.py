@@ -1,3 +1,4 @@
+import random
 from statistics import mean
 import numpy as np
 import pandas as pd
@@ -34,9 +35,10 @@ def main():
   df = pd.read_csv('data/dataset.csv')
   docs = df.to_dict(orient='records')
   queries = df['query'].drop_duplicates().tolist()
+  random.shuffle(docs)
 
-  for d in docs:
-    client.index(index='docs', body=d, pipeline='japanese-text-embeddings')
+  # for d in docs:
+  #   client.index(index='docs', body=d, pipeline='japanese-text-embeddings')
 
   results_a = []
   results_b = []
@@ -66,11 +68,25 @@ def main():
       "_source": {
         "includes": ["title", "body", "score", "reason"]
       },
+      "query": {
+          "bool": {
+              "should": {
+                  "match": {
+                      "title": q
+                  }
+              },
+              "filter": {
+                  "match": {
+                      "query": q
+                  }
+              }
+          }
+      },
       "knn": {
-          "boost": 0.1,
+          "boost": 2,
           "field": "text_embedding.predicted_value",
           "k": 10,
-          "num_candidates": 100,
+          "num_candidates": 50,
           "query_vector_builder": {
               "text_embedding": {
                   "model_id": "cl-tohoku__bert-base-japanese-v2",
@@ -93,6 +109,7 @@ def main():
     scores_a = [r['_source']['score'] for r in result_a['hits']['hits']]
     scores_b = [r['_source']['score'] for r in result_b['hits']['hits']]
     print('===========================')
+    print(f'query: {q}')
     print('---------scores------------')
     print(scores_a)
     print(scores_b)

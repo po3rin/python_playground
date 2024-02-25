@@ -8,6 +8,7 @@ services:
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
+      - xpack.ml.max_machine_memory_percent=80
     volumes:
       - ./:/usr/src/llm-dataset
     entrypoint:
