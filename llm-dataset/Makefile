@@ -7,3 +7,5 @@ setup:
 		--start
 	curl -XPUT 'localhost:9200/_ingest/pipeline/japanese-text-embeddings' -H 'Content-Type: application/json' -d @./pipeline.json
 	eskeeper < eskeeper.yml
+delete:
+	 curl -X POST localhost:9200/docs/_delete_by_query -H 'Content-Type: application/json' -d '{"query":{"match_all":{}}}'
