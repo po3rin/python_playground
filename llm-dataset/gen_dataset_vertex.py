@@ -1,14 +1,13 @@
-import os
 import json
+import os
 import random
 
-import luigi
 import gokart
+import luigi
 import pandas as pd
-from tqdm import tqdm
 import vertexai
+from tqdm import tqdm
 from vertexai.language_models import TextGenerationModel
-
 
 project = os.getenv("GOOGLE_CLOUD_PROJECT_ID")
 location = os.getenv("GOOGLE_CLOUD_LOCATION")

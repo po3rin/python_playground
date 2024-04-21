@@ -1,9 +1,10 @@
 import random
 from statistics import mean
+
 import numpy as np
 import pandas as pd
-from tqdm import tqdm
 from elasticsearch import Elasticsearch
+from tqdm import tqdm
 
 
 def dcg(gain, k=None):
