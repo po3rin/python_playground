@@ -40,7 +40,7 @@ def main():
     random.shuffle(docs)
 
     for d in docs:
-      client.index(index='docs', body=d, pipeline='japanese-text-embeddings')
+        client.index(index="docs", body=d, pipeline="japanese-text-embeddings")
 
     results_a = []
     results_b = []

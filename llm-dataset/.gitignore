@@ -1,3 +1,4 @@
 data/
 load_queries.py
 .env
+memo.md

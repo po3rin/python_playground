@@ -6,7 +6,7 @@ authors = ["po3rin <abctail30@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.12"
+python = "^3.12"
 openai = "^1.5.0"
 luigi = "^3.4.0"
 gokart = "^1.2.5"
