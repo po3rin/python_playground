@@ -2,7 +2,7 @@ import gokart
 
 from tasks.llm.openai import GenerateTestCollectionWithOpenAI
 from tasks.queries import LoadQueries
-from tasks.upload import UploadOpenAI
+from tasks.upload.openai import UploadOpenAI
 
 
 def main():

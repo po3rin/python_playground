@@ -22,10 +22,10 @@ class SearchQueries(gokart.TaskOnKart):
     def run(self):
         vertexai.init(project=project, location=location)
         parameters = {
-            "temperature": 0.5,  # Temperature controls the degree of randomness in token selection.
+            "temperature": 0.5,
             "max_output_tokens": 1000,
-            "top_p": 0.8,  # Tokens are selected from most probable to least until the sum of their probabilities equals the top_p value.
-            "top_k": 40,  # A top_k of 1 means the selected token is the most probable among all tokens.
+            "top_p": 0.8,
+            "top_k": 40,
         }
 
         model = TextGenerationModel.from_pretrained("text-bison@002")

@@ -8,7 +8,7 @@ class GenerateTestCollectionWithOpenAI(gokart.TaskOnKart):
     与えられたクエリに関連する記事タイトルと関連のない記事タイトルを生成するタスク
     """
 
-    input_file_id: int = luigi.TaskParameter()
+    input_file_id: int = gokart.TaskInstanceParameter()
 
     def run(self):
         client = OpenAI()

@@ -12,7 +12,7 @@ class UploadGCS(gokart.TaskOnKart):
     batchで投げるためのpromptを作成する。主にVertex AI用
     """
 
-    queries: list[str] = luigi.Taskparameter()
+    queries: list[str] = gokart.TaskInstanceParameter()
     bucket_name: str = luigi.Parameter()
     destination_blob_name: str = luigi.Parameter()
 
